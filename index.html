@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Gestao de Notas</title>
+</head>
+<body>
+    <h1>CADASTRO DE ALUNOS</h1>
+    <div class="conteiner">
+        <div class="cadastro-aluno">
+            <input type="text" id="input_nome" placeholder="insira seu nome...">
+            <input type="text" id="input_ra" placeholder="insira seu R.A...">
+            <input type="text" id="input_email" placeholder="insira seu email...">
+        </div>
+     
+        <div class="notas_primeiro_bi">
+            <input type="number" id="input_prova_1">
+            <input type="number" id="input_prova_integrada_1">
+            <input type="number" id="input_aep_1">
+        </div>
+   
+        <div class="notas_segundo_bi">
+            <input type="number" id="input_prova_2">
+            <input type="number" id="input_prova_integrada_2">
+            <input type="number" id="input_aep_2">
+        </div>
+        <button onclick="adicionaDadosAluno()">CADASTRAR</button>
+    </div>
+
+    <div class="conteiner-lista">
+        <button class="botoes"><img src="img/editar.png" alt="editar"></button>
+        <button class="botoes"><img src="img/excluir.png" alt=""></button>
+        <table>
+            <tr>
+                <td>nome</td>
+                <td>notas</td>
+                <td>prova1</td>
+                <td>integrada1</td>
+                <td>aep1</td>
+                <td>prova2</td>
+                <td>integrada2</td>
+                <td>aep2</td>
+                <td>status de aprovaçao</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

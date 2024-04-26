@@ -133,3 +133,11 @@ function editar_aluno(posicao) {
     listaAlunos[posicao].notas = texto;
     }
 }
+ function calcularmedia(aep,prova,inte){
+    (prova * 0.8) + (aep * 0.1) + (inte * 0.1)
+
+        return ((prova * 0.8)+(aep * 0.1)+(inte * 0.1))/ 3
+    }
+    function calcularmediasemestre(n1,n2){
+        return (n1+n2)/ 2
+        }

@@ -14,6 +14,15 @@ let listaAlunos = []
 
 function adicionaDadosAluno() {
 
+    nome = inputNome.value.trim()
+    ra = inputRa.value.trim()
+
+    if (nome == '') {
+        return alert('O nome não pode estar em branco.')
+    }
+    if (ra == '') {
+        return alert('O RA não pode estar em branco.')
+    }
 
     // adiciona novo aluno na lista
     listaAlunos.push({
@@ -37,7 +46,8 @@ function adicionaDadosAluno() {
         }
     })
 
-    mostrarDadosAlunos()
+    form.reset()
+    mostrarDadosAluno()
 }
 
 function mostrarDadosAlunos() {
@@ -215,12 +225,14 @@ function editar_aluno(posicao) {
     mostrarDadosAlunos()
 }
 
-function calcularmedia(aep,prova,inte) {
-    (prova * 0.8) + (aep * 0.1) + (inte * 0.1)
+function calcularMediaBimestre(prova, inte, aep){
 
-    return ((prova * 0.8)+(aep * 0.1)+(inte * 0.1))/ 3
+    let media = (prova * 0.8)+(aep * 0.1)+(inte * 0.1)
+    media = Math.max(0, Math.min(media, 10))
+
+    return media
 }
-
-function calcularmediasemestre(n1,n2){
-    return (n1+n2)/ 2
+    
+function calcularMediaSemestre(n1,n2){
+    return (n1+n2)/ 2
 }

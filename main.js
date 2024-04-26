@@ -31,3 +31,105 @@ function adicionaDadosAluno() {
         }
     })
 }
+
+// Função para recarregar tabela HTML após novo registro de alunos (Feito por: Lucas Leffel e GPT)
+function mostrarDadosAluno() {
+    const tabela = document.querySelector('.conteiner-lista table');
+
+    // Limpa a tabela
+    while (tabela.rows.length > 1) {
+        tabela.deleteRow(1);
+    }
+
+    // Preenche a tabela com os dados dos alunos
+    listaAlunos.forEach(aluno => {
+
+        const tr = document.createElement('tr');
+        
+        const tdNome = document.createElement('td');
+        tdNome.textContent = aluno.nome;
+        tr.appendChild(tdNome);
+
+        const tdNotas = document.createElement('td');
+        tdNotas.textContent = `${aluno.notas.primeiroBimestre.prova}, ${aluno.notas.primeiroBimestre.integrada}, ${aluno.notas.primeiroBimestre.aep}`;
+        tr.appendChild(tdNotas);
+
+        const tdProva1 = document.createElement('td');
+        tdProva1.textContent = aluno.notas.segundoBimestre.prova;
+        tr.appendChild(tdProva1);
+
+        const tdIntegrada1 = document.createElement('td');
+        tdIntegrada1.textContent = aluno.notas.segundoBimestre.integrada;
+        tr.appendChild(tdIntegrada1);
+
+        const tdAep1 = document.createElement('td');
+        tdAep1.textContent = aluno.notas.segundoBimestre.aep;
+        tr.appendChild(tdAep1);
+
+        const tdStatus = document.createElement('td');
+        tdStatus.textContent = calcularStatusDeAprovacao(aluno);
+        tr.appendChild(tdStatus);
+
+        tabela.appendChild(tr);
+    });
+}
+
+// Função para determinar status de aprovação do aluno (Feito por: Lucas Leffel)
+function statusNota(media_final) {
+    
+    // Declarando variável de status
+    let status;
+
+    // Se nota mais ou igual a 6 aluno aprovado aprovado
+    if (media_final >= 6) {
+        
+        status = "Aprovado!";
+    }
+
+    // Se nota maior ou igual a 3 e menor que 6 aluno em recuperação
+    else if (media_final < 6 && media_final >= 3) {
+
+        status = "Em recuperação!";
+    }
+
+    // Se não, aluno reprovado
+    else {
+
+        status = "Reprovado!";
+    }
+    
+    //retornar status
+    return status;
+}
+
+// Função de excluir um aluno registrado (Feito por: Lucas Leffel)
+function excluir_aluno(nome) {
+
+    // Retirar elemento da lista
+    listaAlunos.splice(posicao, 1)
+}
+
+// Função de editar registro (Feito parcialmente por: Lucas Leffel)
+function editar_aluno(posicao) {
+
+    // Ainda não sei
+    texto = prompt('Nova descrição:').trim();
+
+    // Se novo registro for nulo faça:
+    if (texto == '' || texto == null) {
+
+        // Exiba tela de erro e execute a função
+        alert('um campo não foi preenchido!');       
+        editar_aluno(posicao);
+    }
+    
+    // Se não, faça:
+    else {
+    
+    // Faça o novo registro
+    listaAlunos[posicao].nome = texto;
+    listaAlunos[posicao].email = texto;
+    listaAlunos[posicao].ra = texto;
+    listaAlunos[posicao].notas = texto;
+    }
+}

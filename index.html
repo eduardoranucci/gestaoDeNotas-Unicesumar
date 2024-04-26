@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="form">
-        <form action="#">
+        <form action="#" id="form">
             <div class="form-header">
                 <h1>CADASTRO DE ALUNO</h1>
             </div>
@@ -35,17 +35,17 @@
                         </div>
                         <div class="notas">
                             <label>Nota prova 1:</label>
-                            <input type="number" min="0" max="8" id="input_prova_1" required>
+                            <input type="number" min="0" max="10" id="input_prova_1" required>
                         </div>
 
                         <div class="notas">
                             <label>Nota prova integrada 1:</label>
-                            <input type="number" min="0" max="8" id="input_prova_integrada_1" required>
+                            <input type="number" min="0" max="10"id="input_prova_integrada_1" required>
                         </div>
 
                         <div class="notas">
                             <label>Nota AEP 1:</label>
-                            <input type="number" min="0" max="8" id="input_aep_1" required>
+                            <input type="number" min="0" max="10" id="input_aep_1" required>
                         </div>
                     </div>
 
@@ -54,15 +54,15 @@
                             <h4>NOTAS DO SEGUNDO BIMESTRE</h4></div>
                         <div class="notas">
                             <label>Nota prova 2:</label>
-                            <input type="number" min="0" max="8" id="input_prova_2" required>
+                            <input type="number" min="0" max="10" id="input_prova_2" required>
                         </div>
                         <div class="notas">
                             <label>Nota prova integrada 2:</label>
-                            <input type="number" min="0" max="8" id="input_prova_integrada_2" required>
+                            <input type="number" min="0" max="10" id="input_prova_integrada_2" required>
                         </div>
                         <div class="notas">
                             <label>Nota AEP 2:</label>
-                            <input type="number" min="0" max="8" id="input_aep_2" required>
+                            <input type="number" min="0" max="10" id="input_aep_2" required>
                         </div>  
                     </div>
                 </div>
@@ -76,7 +76,7 @@
     <div class="conteiner-lista">
         <button class="botoes"><img src="img/editar.png" alt="editar"></button>
         <button class="botoes"><img src="img/excluir.png" alt=""></button>
-        <table>
+        <table id="tabela">
             <tr class="primeira-linha">
                 <td class="coluna1">NOME</td>
                 <td class="colunas">PROVA 1</td>

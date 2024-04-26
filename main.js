@@ -41,15 +41,57 @@ function adicionaDadosAluno() {
 }
 
 function mostrarDadosAlunos() {
-
-    // limpando a tabela
-    tabela.innerHTML = '';
     
     // percorrendo a lista de alunos
     listaAlunos.forEach((aluno, posicao) => {
 
-        // criando os elementos html
+        // criando os elementos da tabela
+        const linhaTabela = document.createElement("tr")
+        const colunaNome = document.createElement("td")
+        const colunaProva1 = document.createElement("td")
+        const colunaIntegrada1 = document.createElement("td")
+        const colunaAep1 = document.createElement("td")
+        const colunaProva2 = document.createElement("td")
+        const colunaIntegrada2 = document.createElement("td")
+        const colunaAep2 = document.createElement("td")
+        const colunaMedia = document.createElement("td")
+        const colunaStatus = document.createElement("td")
 
+
+        const imagemEditar = document.createElement("img")
+        imagemEditar.src = "img/editar.png"
+
+        const imagemExcluir = document.createElement("img")
+        imagemExcluir.src = "img/excluir.png"
+
+        // atribuindo texto
+        colunaNome.innerText = aluno.nome 
+        colunaProva1.innerText = aluno.notas.primeiroBimestre.prova
+        colunaIntegrada1.innerText = aluno.notas.primeiroBimestre.integrada
+        colunaAep1.innerText = aluno.notas.primeiroBimestre.aep
+        colunaProva2.innerText = aluno.notas.segundoBimestre.prova
+        colunaIntegrada2.innerText = aluno.notas.segundoBimestre.integrada
+        colunaAep2.innerText = aluno.notas.segundoBimestre.aep
+        // terminar essa parte
+        colunaMedia.innerText = " " 
+        colunaStatus.innerText = " "
+
+
+        // atribuindo texto nas colunas certas
+        linhaTabela.appendChild (colunaNome)
+        linhaTabela.appendChild (colunaProva1)
+        linhaTabela.appendChild (colunaIntegrada1)
+        linhaTabela.appendChild (colunaAep1)
+        linhaTabela.appendChild (colunaProva2)
+        linhaTabela.appendChild (colunaIntegrada2)
+        linhaTabela.appendChild (colunaAep2)
+        linhaTabela.appendChild (colunaMedia)
+        linhaTabela.appendChild (colunaStatus)
+        linhaTabela.appendChild (imagemEditar)
+        linhaTabela.appendChild (imagemExcluir)
+        
+
+        tabela.appendChild(linhaTabela)
     })
 
     // salvando a lista no localstorage

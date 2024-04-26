@@ -8,6 +8,14 @@
     outline: none;    
 }
 
+
+/*
+cores:
+- aprovado: #8EDC7C   #94DB26
+- reprovado: #E44747
+- recuperacao: #F6EA50
+*/
+
 body{
     background-color: #C0C0C0;
     width: 100%;
@@ -176,4 +184,7 @@ img{
     border-radius: 10px;
 }
 
-
+td{
+    text-align: center;
+    padding: 15px;
+}

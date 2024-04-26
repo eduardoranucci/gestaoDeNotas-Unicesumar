@@ -3,46 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>Gestao de Notas</title>
 </head>
 <body>
-    <h1>CADASTRO DE ALUNOS</h1>
-    <div class="conteiner">
-        <div class="cadastro-aluno">
-            <input type="text" id="input_nome" placeholder="insira seu nome...">
-            <input type="text" id="input_ra" placeholder="insira seu R.A...">
-            <input type="text" id="input_email" placeholder="insira seu email...">
-        </div>
-     
-        <div class="notas_primeiro_bi">
-            <input type="number" id="input_prova_1">
-            <input type="number" id="input_prova_integrada_1">
-            <input type="number" id="input_aep_1">
-        </div>
-   
-        <div class="notas_segundo_bi">
-            <input type="number" id="input_prova_2">
-            <input type="number" id="input_prova_integrada_2">
-            <input type="number" id="input_aep_2">
-        </div>
-        <button onclick="adicionaDadosAluno()">CADASTRAR</button>
+    <div class="form">
+        <form action="#">
+            <div class="form-header">
+                <h1>CADASTRO DE ALUNO</h1>
+            </div>
+            <div class="input-grupo">
+                <div class="input-box">
+                    <label for="name">Nome completo</label>
+                    <input type="text" id="input_nome" placeholder="insira o nome do aluno..." required>
+                </div>
+
+                <div class="input-box">
+                    <label for="ra">R.A. do aluno</label>
+                    <input type="text" id="input_ra" placeholder="insira seu R.A..." required>
+                </div>
+
+                <div class="input-box">
+                    <label for="email">Email do aluno</label>
+                    <input type="email" id="input_email" placeholder="insira o email do aluno..." required>
+                </div>
+                <div class="notas-gerais">
+                    <div class="notas-primeiro-bi">
+                        <h4>NOTAS DO PRIMEIRO BIMESTRE</h4>
+                        <div class="notas">
+                            <label>Nota prova 1:</label>
+                            <input type="number" min="0" max="8" id="input_prova_1" required>
+                        </div>
+
+                        <div class="notas">
+                            <label>Nota prova integrada 1:</label>
+                            <input type="number" min="0" max="8" id="input_prova_integrada_1" required>
+                        </div>
+
+                        <div class="notas">
+                            <label>Nota AEP 1:</label>
+                            <input type="number" min="0" max="8" id="input_aep_1" required>
+                        </div>
+                    </div>
+
+                    <div class="notas-segundo-bi">
+                        <h4>NOTAS DO SEGUNDO BIMESTRE</h4>
+                        <div class="notas">
+                            <label>Nota prova 2:</label>
+                            <input type="number" min="0" max="8" id="input_prova_2" required>
+                        </div>
+                        <div class="notas">
+                            <label>Nota prova integrada 2:</label>
+                            <input type="number" min="0" max="8" id="input_prova_integrada_2" required>
+                        </div>
+                        <div class="notas">
+                            <label>Nota AEP 2:</label>
+                            <input type="number" min="0" max="8" id="input_aep_2" required>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+            <div class="botao-cadastrar">
+                <button onclick="adicionaDadosAluno()">CADASTRAR</button>
+            </div>
+        </form>
     </div>
 
     <div class="conteiner-lista">
         <button class="botoes"><img src="img/editar.png" alt="editar"></button>
         <button class="botoes"><img src="img/excluir.png" alt=""></button>
         <table>
-            <tr>
-                <td>nome</td>
-                <td>notas</td>
-                <td>prova1</td>
-                <td>integrada1</td>
-                <td>aep1</td>
-                <td>prova2</td>
-                <td>integrada2</td>
-                <td>aep2</td>
-                <td>status de aprovaçao</td>
+            <tr class="primeira-linha">
+                <td class="coluna1">NOME</td>
+                <td class="colunas">PROVA 1</td>
+                <td class="colunas">INTEGRADA 1</td>
+                <td class="colunas">AEP 1</td>
+                <td class="colunas">PROVA 2</td>
+                <td class="colunas">INTEGRADA 2</td>
+                <td class="colunas">AEP 2</td>
+                <td class="colunas">MÉDIA</td>
+                <td class="colunas">STATUS DE APROVAÇÃO</td>
             </tr>
         </table>
     </div>

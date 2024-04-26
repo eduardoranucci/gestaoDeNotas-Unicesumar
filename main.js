@@ -42,55 +42,94 @@ function adicionaDadosAluno() {
 
 function mostrarDadosAlunos() {
     
+    // pegando as linhas da tabela
+    let linhas = tabela.children
+    let listaLinhas = Array.from(linhas)
+
+    // percorrendo as linhas e deletando
+    for (let i = listaLinhas.length - 1; i > 0; i--) {
+        tabela.removeChild(listaLinhas[i])
+    }
+
     // percorrendo a lista de alunos
     listaAlunos.forEach((aluno, posicao) => {
 
         // criando os elementos da tabela
         const linhaTabela = document.createElement("tr")
         const colunaNome = document.createElement("td")
+        const colunaRa = document.createElement("td")
+        const colunaEmail = document.createElement("td")
         const colunaProva1 = document.createElement("td")
         const colunaIntegrada1 = document.createElement("td")
         const colunaAep1 = document.createElement("td")
+        const colunaMedia1 = document.createElement("td")
         const colunaProva2 = document.createElement("td")
         const colunaIntegrada2 = document.createElement("td")
         const colunaAep2 = document.createElement("td")
-        const colunaMedia = document.createElement("td")
+        const colunaMedia2 = document.createElement("td")
+        const colunaMediaFinal = document.createElement("td")
         const colunaStatus = document.createElement("td")
 
-
+        const btnEditar = document.createElement('button')
         const imagemEditar = document.createElement("img")
         imagemEditar.src = "img/editar.png"
+        btnEditar.className = 'botoes'
 
+        btnEditar.appendChild(imagemEditar)
+        btnEditar.setAttribute('onclick', `editar_aluno('${posicao}')`);
+
+        const btnExcluir = document.createElement('button')
         const imagemExcluir = document.createElement("img")
         imagemExcluir.src = "img/excluir.png"
+        btnExcluir.className = 'botoes'
+
+        btnExcluir.appendChild(imagemExcluir)
+        btnExcluir.setAttribute('onclick', `excluir_aluno('${posicao}')`);
+
+        let prova1 = aluno.notas.primeiroBimestre.prova
+        let integrada1 = aluno.notas.primeiroBimestre.integrada
+        let aep1 = aluno.notas.primeiroBimestre.aep
+        let prova2 = aluno.notas.segundoBimestre.prova
+        let integrada2 = aluno.notas.segundoBimestre.integrada
+        let aep2 = aluno.notas.segundoBimestre.aep
+
+        let media1 = '' // calculaMediaBimestre(prova1, integrada1, aep1)
+        let media2 = '' // calculaMediaBimestre(prova2, integrada2, aep2)
+        let mediaFinal = '' // calculaMediaSemestre(media1, media2)
+        let status = '' // statusNota(mediaFinal)
 
         // atribuindo texto
-        colunaNome.innerText = aluno.nome 
-        colunaProva1.innerText = aluno.notas.primeiroBimestre.prova
-        colunaIntegrada1.innerText = aluno.notas.primeiroBimestre.integrada
-        colunaAep1.innerText = aluno.notas.primeiroBimestre.aep
-        colunaProva2.innerText = aluno.notas.segundoBimestre.prova
-        colunaIntegrada2.innerText = aluno.notas.segundoBimestre.integrada
-        colunaAep2.innerText = aluno.notas.segundoBimestre.aep
-        // terminar essa parte
-        colunaMedia.innerText = " " 
-        colunaStatus.innerText = " "
-
+        colunaNome.innerText = aluno.nome
+        colunaRa.innerText = aluno.ra
+        colunaEmail.innerText = aluno.email 
+        colunaProva1.innerText = prova1
+        colunaIntegrada1.innerText = integrada1
+        colunaAep1.innerText = aep1
+        colunaMedia1.innerText = media1
+        colunaProva2.innerText = prova2
+        colunaIntegrada2.innerText = integrada2
+        colunaAep2.innerText = aep2
+        colunaMedia2.innerText = media2
+        colunaMediaFinal.innerText = mediaFinal 
+        colunaStatus.innerText = status
 
         // atribuindo texto nas colunas certas
-        linhaTabela.appendChild (colunaNome)
-        linhaTabela.appendChild (colunaProva1)
-        linhaTabela.appendChild (colunaIntegrada1)
-        linhaTabela.appendChild (colunaAep1)
-        linhaTabela.appendChild (colunaProva2)
-        linhaTabela.appendChild (colunaIntegrada2)
-        linhaTabela.appendChild (colunaAep2)
-        linhaTabela.appendChild (colunaMedia)
-        linhaTabela.appendChild (colunaStatus)
-        linhaTabela.appendChild (imagemEditar)
-        linhaTabela.appendChild (imagemExcluir)
+        linhaTabela.appendChild(colunaNome)
+        linhaTabela.appendChild(colunaRa)
+        linhaTabela.appendChild(colunaEmail)
+        linhaTabela.appendChild(colunaProva1)
+        linhaTabela.appendChild(colunaIntegrada1)
+        linhaTabela.appendChild(colunaAep1)
+        linhaTabela.appendChild(colunaMedia1)
+        linhaTabela.appendChild(colunaProva2)
+        linhaTabela.appendChild(colunaIntegrada2)
+        linhaTabela.appendChild(colunaAep2)
+        linhaTabela.appendChild(colunaMedia2)
+        linhaTabela.appendChild(colunaMediaFinal)
+        linhaTabela.appendChild(colunaStatus)
+        linhaTabela.appendChild(btnEditar)
+        linhaTabela.appendChild(btnExcluir)
         
-
         tabela.appendChild(linhaTabela)
     })
 

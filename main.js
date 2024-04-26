@@ -7,22 +7,28 @@ const inputAep1 = document.getElementById('input_aep_1')
 const inputProva2 = document.getElementById('input_prova_2')
 const inputProvaIntegrada2 = document.getElementById('input_prova_integrada_2')
 const inputAep2 = document.getElementById('input_aep_2')
+const form = document.getElementById('form') 
+const tabela = document.getElementById('tabela')
 
 let listaAlunos = []
 
 function adicionaDadosAluno() {
 
 
+    // adiciona novo aluno na lista
     listaAlunos.push({
+        // define os atributos do aluno
         nome: inputNome.value,
         email: inputEmail.value,
         ra: inputRa.value,
-        notas: { 
+        notas: {
+            // define as notas do primeiro bimestre 
             primeiroBimestre: {
                 prova: inputProva1.value,
                 integrada: inputProvaIntegrada1.value,
                 aep: inputAep1.value,
-            }, 
+            },
+            // define as notas do segundo bimestre 
             segundoBimestre: {
                 prova: inputProva2.value,
                 integrada: inputProvaIntegrada2.value,
@@ -30,49 +36,42 @@ function adicionaDadosAluno() {
             }
         }
     })
+
+    mostrarDadosAlunos()
 }
 
-// Função para recarregar tabela HTML após novo registro de alunos (Feito por: Lucas Leffel e GPT)
-function mostrarDadosAluno() {
-    const tabela = document.querySelector('.conteiner-lista table');
+function mostrarDadosAlunos() {
 
-    // Limpa a tabela
-    while (tabela.rows.length > 1) {
-        tabela.deleteRow(1);
+    // limpando a tabela
+    tabela.innerHTML = '';
+    
+    // percorrendo a lista de alunos
+    listaAlunos.forEach((aluno, posicao) => {
+
+        // criando os elementos html
+
+    })
+
+    // salvando a lista no localstorage
+    localStorage.setItem('alunos', JSON.stringify(listaAlunos))
+}
+
+function recarregarDadosAlunos() {
+
+    // pegando os dados do localstorage
+    const dadosAlunosLocalStorage = localStorage.getItem('alunos')
+
+    // verificando se há dados no localstorage
+    if (dadosAlunosLocalStorage) {
+
+        // adicionando os dados a lista de alunos
+        listaAlunos = JSON.parse(dadosAlunosLocalStorage)
     }
 
-    // Preenche a tabela com os dados dos alunos
-    listaAlunos.forEach(aluno => {
-
-        const tr = document.createElement('tr');
-        
-        const tdNome = document.createElement('td');
-        tdNome.textContent = aluno.nome;
-        tr.appendChild(tdNome);
-
-        const tdNotas = document.createElement('td');
-        tdNotas.textContent = `${aluno.notas.primeiroBimestre.prova}, ${aluno.notas.primeiroBimestre.integrada}, ${aluno.notas.primeiroBimestre.aep}`;
-        tr.appendChild(tdNotas);
-
-        const tdProva1 = document.createElement('td');
-        tdProva1.textContent = aluno.notas.segundoBimestre.prova;
-        tr.appendChild(tdProva1);
-
-        const tdIntegrada1 = document.createElement('td');
-        tdIntegrada1.textContent = aluno.notas.segundoBimestre.integrada;
-        tr.appendChild(tdIntegrada1);
-
-        const tdAep1 = document.createElement('td');
-        tdAep1.textContent = aluno.notas.segundoBimestre.aep;
-        tr.appendChild(tdAep1);
-
-        const tdStatus = document.createElement('td');
-        tdStatus.textContent = calcularStatusDeAprovacao(aluno);
-        tr.appendChild(tdStatus);
-
-        tabela.appendChild(tr);
-    });
+    mostrarDadosAlunos()
 }
+
+recarregarDadosAlunos()
 
 // Função para determinar status de aprovação do aluno (Feito por: Lucas Leffel)
 function statusNota(media_final) {
@@ -82,19 +81,16 @@ function statusNota(media_final) {
 
     // Se nota mais ou igual a 6 aluno aprovado aprovado
     if (media_final >= 6) {
-        
         status = "Aprovado!";
     }
 
     // Se nota maior ou igual a 3 e menor que 6 aluno em recuperação
     else if (media_final < 6 && media_final >= 3) {
-
         status = "Em recuperação!";
     }
 
     // Se não, aluno reprovado
     else {
-
         status = "Reprovado!";
     }
     
@@ -103,10 +99,12 @@ function statusNota(media_final) {
 }
 
 // Função de excluir um aluno registrado (Feito por: Lucas Leffel)
-function excluir_aluno(nome) {
+function excluir_aluno(posicao) {
 
     // Retirar elemento da lista
     listaAlunos.splice(posicao, 1)
+
+    mostrarDadosAlunos()
 }
 
 // Função de editar registro (Feito parcialmente por: Lucas Leffel)
@@ -132,12 +130,16 @@ function editar_aluno(posicao) {
     listaAlunos[posicao].ra = texto;
     listaAlunos[posicao].notas = texto;
     }
+
+    mostrarDadosAlunos()
 }
- function calcularmedia(aep,prova,inte){
+
+function calcularmedia(aep,prova,inte) {
     (prova * 0.8) + (aep * 0.1) + (inte * 0.1)
 
-        return ((prova * 0.8)+(aep * 0.1)+(inte * 0.1))/ 3
-    }
-    function calcularmediasemestre(n1,n2){
-        return (n1+n2)/ 2
-        }
+    return ((prova * 0.8)+(aep * 0.1)+(inte * 0.1))/ 3
+}
+
+function calcularmediasemestre(n1,n2){
+    return (n1+n2)/ 2
+}

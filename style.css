@@ -188,3 +188,21 @@ img{
 td {
     text-align: center;
 }
+
+.aprovado {
+    background-color: #8EDC7C;
+    color: black;
+    border-radius: 10px;
+}
+
+.recuperacao {
+    background-color: #F6EA50;
+    color: black;
+    border-radius: 10px;
+}
+
+.reprovado {
+    background-color: #E44747;
+    color: black;
+    border-radius: 10px;
+}

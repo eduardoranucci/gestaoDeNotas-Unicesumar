@@ -14,14 +14,41 @@ let listaAlunos = []
 
 function adicionaDadosAluno() {
 
-    nome = inputNome.value.trim()
-    ra = inputRa.value.trim()
+    let nome = inputNome.value.trim()
+    let ra = inputRa.value.trim()
+    let valorProva1 = inputProva1.value
+    let valorProva2 = inputProva2.value
+    let valorAep1 = inputAep1.value
+    let valorAep2 = inputAep2.value
+    let valorIntegrada1 = inputProvaIntegrada1.value
+    let valorIntegrada2 = inputProvaIntegrada2.value
 
     if (nome == '') {
         return alert('O nome não pode estar em branco.')
     }
     if (ra == '') {
         return alert('O RA não pode estar em branco.')
+    }
+    if (inputEmail.value == '') {
+        return alert('O Email não pode estar em branco.')
+    }
+    if (valorProva1 == '' || valorProva1 < 0 || valorProva1 > 10) {
+        return alert('Prova1 não pode estar em branco, menor que zero ou maior que dez.')
+    }
+    if (valorProva2 == '' || valorProva2 < 0 || valorProva2 > 10) {
+        return alert('Prova2 não pode estar em branco, menor que zero ou maior que dez.')
+    }
+    if (valorAep1 == '' || valorAep1 < 0 || valorAep1 > 10) {
+        return alert('AEP1 não pode estar em branco, menor que zero ou maior que dez.')
+    }
+    if (valorAep2 == '' || valorAep2 < 0 || valorAep2 > 10) {
+        return alert('AEP2 não pode estar em branco, menor que zero ou maior que dez.')
+    }
+    if (valorIntegrada1 == '' || valorIntegrada1 < 0 || valorIntegrada1 > 10) {
+        return alert('Integrada1 não pode estar em branco, menor que zero ou maior que dez.')
+    }
+    if (valorIntegrada2 == '' || valorIntegrada2 < 0 || valorIntegrada2 > 10) {
+        return alert('Integrada2 não pode estar em branco, menor que zero ou maior que dez.')
     }
 
     // adiciona novo aluno na lista
@@ -105,10 +132,18 @@ function mostrarDadosAlunos() {
         let integrada2 = aluno.notas.segundoBimestre.integrada
         let aep2 = aluno.notas.segundoBimestre.aep
 
-        let media1 = '' // calculaMediaBimestre(prova1, integrada1, aep1)
-        let media2 = '' // calculaMediaBimestre(prova2, integrada2, aep2)
-        let mediaFinal = '' // calculaMediaSemestre(media1, media2)
-        let status = '' // statusNota(mediaFinal)
+        let media1 = calcularMediaBimestre(prova1, integrada1, aep1)
+        let media2 = calcularMediaBimestre(prova2, integrada2, aep2)
+        let mediaFinal = calcularMediaSemestre(media1, media2)
+        let status = statusNota(mediaFinal)
+
+        if (status == 'Aprovado!') {
+            colunaStatus.setAttribute('class', 'aprovado')
+        } else if (status == 'Em recuperação!') {
+            colunaStatus.setAttribute('class', 'recuperacao')
+        } else {
+            colunaStatus.setAttribute('class', 'reprovado')
+        }
 
         // atribuindo texto
         colunaNome.innerText = aluno.nome
@@ -117,12 +152,12 @@ function mostrarDadosAlunos() {
         colunaProva1.innerText = prova1
         colunaIntegrada1.innerText = integrada1
         colunaAep1.innerText = aep1
-        colunaMedia1.innerText = media1
+        colunaMedia1.innerText = media1.toFixed(2)
         colunaProva2.innerText = prova2
         colunaIntegrada2.innerText = integrada2
         colunaAep2.innerText = aep2
-        colunaMedia2.innerText = media2
-        colunaMediaFinal.innerText = mediaFinal 
+        colunaMedia2.innerText = media2.toFixed(2)
+        colunaMediaFinal.innerText = mediaFinal.toFixed(2)
         colunaStatus.innerText = status
 
         // atribuindo texto nas colunas certas
@@ -208,7 +243,7 @@ function calcularMediaBimestre(prova, inte, aep){
 }
     
 function calcularMediaSemestre(n1,n2){
-    return (n1+n2)/ 2
+    return (n1+n2)/ 2
 }
 
 // Funções para editar registro
@@ -389,3 +424,63 @@ function editar_prova2(posicao) {
         editar_prova2(posicao);
     }
 }
+
+document.getElementById('input_prova_1').addEventListener('input', function() {
+    let inputProva1 = this.value.trim()
+    let inputIntegrada1 = document.getElementById('input_prova_integrada_1').value.trim()
+    let inputAep1 = document.getElementById('input_aep_1').value.trim()
+
+    let inputProva2 = document.getElementById('input_prova_2')
+    let inputIntegrada2 = document.getElementById('input_prova_integrada_2')
+    let inputAep2 = document.getElementById('input_aep_2')
+    
+    if (inputProva1 !== '' && inputIntegrada1 !== '' && inputAep1 !== '') {
+        inputProva2.disabled = false;
+        inputIntegrada2.disabled = false;
+        inputAep2.disabled = false;
+    } else {
+        inputProva2.disabled = true;
+        inputIntegrada2.disabled = true;
+        inputAep2.disabled = true;
+    }
+});
+
+document.getElementById('input_aep_1').addEventListener('input', function() {
+    let inputAep1 = this.value.trim()
+    let inputIntegrada1 = document.getElementById('input_prova_integrada_1').value.trim()
+    let inputProva1 = document.getElementById('input_prova_1').value.trim()
+
+    let inputProva2 = document.getElementById('input_prova_2')
+    let inputIntegrada2 = document.getElementById('input_prova_integrada_2')
+    let inputAep2 = document.getElementById('input_aep_2')
+    
+    if (inputProva1 !== '' && inputIntegrada1 !== '' && inputAep1 !== '') {
+        inputProva2.disabled = false;
+        inputIntegrada2.disabled = false;
+        inputAep2.disabled = false;
+    } else {
+        inputProva2.disabled = true;
+        inputIntegrada2.disabled = true;
+        inputAep2.disabled = true;
+    }
+});
+
+document.getElementById('input_prova_integrada_1').addEventListener('input', function() {
+    let inputIntegrada1 = this.value.trim()
+    let inputProva1 = document.getElementById('input_prova_1').value.trim()
+    let inputAep1 = document.getElementById('input_aep_1').value.trim()
+
+    let inputProva2 = document.getElementById('input_prova_2')
+    let inputIntegrada2 = document.getElementById('input_prova_integrada_2')
+    let inputAep2 = document.getElementById('input_aep_2')
+    
+    if (inputProva1 !== '' && inputIntegrada1 !== '' && inputAep1 !== '') {
+        inputProva2.disabled = false;
+        inputIntegrada2.disabled = false;
+        inputAep2.disabled = false;
+    } else {
+        inputProva2.disabled = true;
+        inputIntegrada2.disabled = true;
+        inputAep2.disabled = true;
+    }
+});

@@ -47,7 +47,7 @@ function adicionaDadosAluno() {
     })
 
     form.reset()
-    mostrarDadosAluno()
+    mostrarDadosAlunos()
 }
 
 function mostrarDadosAlunos() {
@@ -79,14 +79,16 @@ function mostrarDadosAlunos() {
         const colunaMedia2 = document.createElement("td")
         const colunaMediaFinal = document.createElement("td")
         const colunaStatus = document.createElement("td")
-
-        const btnEditar = document.createElement('button')
-        const imagemEditar = document.createElement("img")
-        imagemEditar.src = "img/editar.png"
-        btnEditar.className = 'botoes'
-
-        btnEditar.appendChild(imagemEditar)
-        btnEditar.setAttribute('onclick', `editar_aluno('${posicao}')`);
+        
+        colunaNome.setAttribute('onclick', `editar_nome('${posicao}')`);
+        colunaRa.setAttribute('onclick', `editar_ra('${posicao}')`);
+        colunaEmail.setAttribute('onclick', `editar_email('${posicao}')`);
+        colunaAep1.setAttribute('onclick', `editar_aep('${posicao}')`);
+        colunaAep2.setAttribute('onclick', `editar_aep2('${posicao}')`);
+        colunaIntegrada1.setAttribute('onclick', `editar_integrada('${posicao}')`);
+        colunaIntegrada2.setAttribute('onclick', `editar_integrada2('${posicao}')`);
+        colunaProva1.setAttribute('onclick', `editar_prova('${posicao}')`);
+        colunaProva2.setAttribute('onclick', `editar_prova2('${posicao}')`);
 
         const btnExcluir = document.createElement('button')
         const imagemExcluir = document.createElement("img")
@@ -137,7 +139,6 @@ function mostrarDadosAlunos() {
         linhaTabela.appendChild(colunaMedia2)
         linhaTabela.appendChild(colunaMediaFinal)
         linhaTabela.appendChild(colunaStatus)
-        linhaTabela.appendChild(btnEditar)
         linhaTabela.appendChild(btnExcluir)
         
         tabela.appendChild(linhaTabela)
@@ -198,33 +199,6 @@ function excluir_aluno(posicao) {
     mostrarDadosAlunos()
 }
 
-// Função de editar registro (Feito parcialmente por: Lucas Leffel)
-function editar_aluno(posicao) {
-
-    // Ainda não sei
-    texto = prompt('Nova descrição:').trim();
-
-    // Se novo registro for nulo faça:
-    if (texto == '' || texto == null) {
-
-        // Exiba tela de erro e execute a função
-        alert('um campo não foi preenchido!');       
-        editar_aluno(posicao);
-    }
-    
-    // Se não, faça:
-    else {
-    
-    // Faça o novo registro
-    listaAlunos[posicao].nome = texto;
-    listaAlunos[posicao].email = texto;
-    listaAlunos[posicao].ra = texto;
-    listaAlunos[posicao].notas = texto;
-    }
-
-    mostrarDadosAlunos()
-}
-
 function calcularMediaBimestre(prova, inte, aep){
 
     let media = (prova * 0.8)+(aep * 0.1)+(inte * 0.1)
@@ -235,4 +209,183 @@ function calcularMediaBimestre(prova, inte, aep){
     
 function calcularMediaSemestre(n1,n2){
     return (n1+n2)/ 2
+}
+
+// Funções para editar registro
+
+function editar_nome(posicao) {
+
+    texto = prompt('Novo nome:').trim();
+
+    // Se novo registro for nulo faça:
+    if (texto == '' || texto == null) {
+
+        // Exiba tela de erro e execute a função
+        alert('um campo não foi preenchido!');
+        editar_nome(posicao);
+    }
+
+    listaAlunos[posicao].nome = texto;
+
+    mostrarDadosAlunos()
+}
+
+function editar_email(posicao) {
+
+    texto = prompt('Novo email:').trim();
+
+    // Se novo registro for nulo faça:
+    if (texto == '' || texto == null) {
+
+        // Exiba tela de erro e execute a função
+        alert('um campo não foi preenchido!');
+        editar_email(posicao);
+    }
+
+    listaAlunos[posicao].email = texto;
+
+    mostrarDadosAlunos()
+}
+
+function editar_nome(posicao) {
+
+    texto = prompt('Novo nome:').trim();
+
+    // Se novo registro for nulo faça:
+    if (texto == '' || texto == null) {
+
+        // Exiba tela de erro e execute a função
+        alert('um campo não foi preenchido!');
+        editar_nome(posicao);
+    }
+
+    listaAlunos[posicao].nome = texto;
+
+    mostrarDadosAlunos()
+}
+
+function editar_email(posicao) {
+
+    texto = prompt('Novo email:').trim();
+
+    // Se novo registro for nulo faça:
+    if (texto == '' || texto == null) {
+
+        // Exiba tela de erro e execute a função
+        alert('um campo não foi preenchido!');
+        editar_email(posicao);
+    }
+
+    listaAlunos[posicao].email = texto;
+
+    mostrarDadosAlunos()
+}
+
+function editar_ra(posicao) {
+
+    texto = prompt('Novo RA:').trim();
+
+    // Se novo registro for nulo faça:
+    if (texto == '' || texto == null) {
+
+        // Exiba tela de erro e execute a função
+        alert('um campo não foi preenchido!');
+        editar_ra(posicao);
+    }
+
+    listaAlunos[posicao].ra = texto;
+
+    mostrarDadosAlunos()
+}
+
+function editar_aep(posicao) {
+    texto = prompt('Nova nota AEP:').trim();
+
+    // Verifica se o texto é um número e está dentro do intervalo
+    if (!isNaN(texto) && parseFloat(texto) >= 0 && parseFloat(texto) <= 10) {
+        listaAlunos[posicao].notas.primeiroBimestre.aep = parseFloat(texto).toFixed(2);
+
+        mostrarDadosAlunos();
+    } else {
+        // Exibe tela de erro e executa a função novamente
+        alert('Por favor, insira um número válido entre 0 e 10!');
+        editar_aep(posicao);
+    }
+}
+
+
+function editar_aep2(posicao) {
+    texto = prompt('Nova nota AEP:').trim();
+
+    // Verifica se o texto é um número e está dentro do intervalo
+    if (!isNaN(texto) && parseFloat(texto) >= 0 && parseFloat(texto) <= 10) {
+        listaAlunos[posicao].notas.segundoBimestre.aep = parseFloat(texto).toFixed(2);
+
+        mostrarDadosAlunos();
+    } else {
+        // Exibe tela de erro e executa a função novamente
+        alert('Por favor, insira um número válido entre 0 e 10!');
+        editar_aep2(posicao);
+    }
+}
+
+function editar_integrada(posicao) {
+    texto = prompt('Nova nota integrada:').trim();
+
+    // Verifica se o texto é um número e está dentro do intervalo
+    if (!isNaN(texto) && parseFloat(texto) >= 0 && parseFloat(texto) <= 10) {
+        listaAlunos[posicao].notas.primeiroBimestre.integrada = parseFloat(texto).toFixed(2);
+
+        mostrarDadosAlunos();
+    } else {
+        // Exibe tela de erro e executa a função novamente
+        alert('Por favor, insira um número válido entre 0 e 10!');
+        editar_integrada(posicao);
+    }
+}
+
+function editar_integrada2(posicao) {
+    texto = prompt('Nova nota integrada:').trim();
+
+    // Verifica se o texto é um número e está dentro do intervalo
+    if (!isNaN(texto) && parseFloat(texto) >= 0 && parseFloat(texto) <= 10) {
+        listaAlunos[posicao].notas.segundoBimestre.integrada = parseFloat(texto).toFixed(2);
+
+        mostrarDadosAlunos();
+    } else {
+        // Exibe tela de erro e executa a função novamente
+        alert('Por favor, insira um número válido entre 0 e 10!');
+        editar_integrada2(posicao);
+    }
+}
+
+
+function editar_prova(posicao) {
+    texto = prompt('Nova nota prova:').trim();
+
+    // Verifica se o texto é um número e está dentro do intervalo
+    if (!isNaN(texto) && parseFloat(texto) >= 0 && parseFloat(texto) <= 10) {
+        listaAlunos[posicao].notas.primeiroBimestre.prova = parseFloat(texto).toFixed(2);
+
+        mostrarDadosAlunos();
+    } else {
+        // Exibe tela de erro e executa a função novamente
+        alert('Por favor, insira um número válido entre 0 e 10!');
+        editar_prova(posicao);
+    }
+}
+
+function editar_prova2(posicao) {
+    texto = prompt('Nova nota prova:').trim();
+
+    // Verifica se o texto é um número e está dentro do intervalo
+    if (!isNaN(texto) && parseFloat(texto) >= 0 && parseFloat(texto) <= 10) {
+        listaAlunos[posicao].notas.segundoBimestre.prova = parseFloat(texto).toFixed(2);
+
+        mostrarDadosAlunos();
+    } else {
+        // Exibe tela de erro e executa a função novamente
+        alert('Por favor, insira um número válido entre 0 e 10!');
+        editar_prova2(posicao);
+    }
 }
